@@ -3,7 +3,7 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-
+import os
 # =====================================================================
 # 1. BASES DE DATOS DEL ECOSISTEMA INTEGRADO
 # =====================================================================
@@ -429,4 +429,9 @@ with gr.Blocks(title="Ecosistema de Redes e Indicadores") as demo_3d:
     demo_3d.load(fn=cargar_datos_conpes, inputs=conpes_select, outputs=[txt_ano, txt_entidad, txt_presupuesto, txt_impacto, txt_sinergia])
     demo_3d.load(fn=simular_matriz_relacion, inputs=inputs_matriz, outputs=outputs_matriz)
 
-demo_3d.launch(server_name="127.0.0.1", server_port=7860, share=False, theme=gr.themes.Soft(primary_hue="teal", secondary_hue="blue"))
+demo_3d.launch(
+    server_name="0.0.0.0",
+    server_port=int(os.environ.get("PORT", 7860)),
+    share=False,
+    theme=gr.themes.Soft(primary_hue="teal", secondary_hue="blue")
+)
